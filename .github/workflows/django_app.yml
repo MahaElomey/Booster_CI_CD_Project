@@ -17,7 +17,7 @@ jobs:
       - name: Run CI
         run: |
             docker build . --file dockerfile -t mahaelkomey/iti-43-django:v1.0
-            docker login -u ${myuser} -p ${mypass}
+            docker login -u ${{ secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
             docker push mahaelkomey/iti-43-django:v1.0
             
   CD:
@@ -28,7 +28,7 @@ jobs:
 
       - name: Run CD
         run: |
-            docker login -u ${myuser} -p ${mypass}
+            docker login -u ${{ secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
             docker run -d -p 8000:8000 mahaelkomey/iti-43-django:v1.0
             
       
